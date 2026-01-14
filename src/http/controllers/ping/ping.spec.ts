@@ -1,4 +1,4 @@
-import { app } from '@/app.js'
+import { app } from '@/main/app.js'
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 

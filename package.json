@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:dev": "npm run services:up && tsx watch src/server.ts",
+    "start:dev": "npm run services:up && tsx watch src/main/server.ts",
     "services:up": "docker compose -f compose.yaml up -d",
     "services:stop": "docker compose -f compose.yaml stop",
     "services:down": "docker compose -f compose.yaml down",

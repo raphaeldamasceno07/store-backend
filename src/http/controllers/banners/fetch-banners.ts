@@ -1,4 +1,4 @@
-import { makeGetAllBannersUseCase } from '@/use-cases/factories/make-get-all-banners-use-case.js'
+import { makeGetAllBannersUseCase } from '@/main/factories/make-get-all-banners-use-case.js'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function fetchBanners(

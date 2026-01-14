@@ -1,7 +1,8 @@
-import { InMemoryBannersRepository } from '@/repositories/in-memory/in-memory-banners-repository.js'
-import { bannersMocked } from '@/utils/mocks/banners-mocked.js'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { InMemoryBannersRepository } from '@/shared/in-memory/in-memory-banners-repository.js'
 import { GetAllBannersUseCase } from './get-all-banners.js'
+import { beforeEach, describe, expect } from 'vitest'
+import { bannersMocked } from '@/utils/mocks/banners-mocked.js'
+import { it } from 'node:test'
 
 let bannersRepository: InMemoryBannersRepository
 let sut: GetAllBannersUseCase

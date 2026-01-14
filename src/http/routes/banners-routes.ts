@@ -1,6 +1,6 @@
-import { createSwaggerSchema } from '@/libs/swagger.js'
+import { createSwaggerSchema } from '@/providers/swagger.js'
 import type { FastifyInstance } from 'fastify'
-import { fetchBanners } from './fetch-banners.js'
+import { fetchBanners } from '../controllers/banners/fetch-banners.js'
 
 export async function bannersRoutes(app: FastifyInstance) {
   app.get(

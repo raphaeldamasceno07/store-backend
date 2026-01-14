@@ -1,6 +1,6 @@
-import { createSwaggerSchema } from '@/libs/swagger.js'
+import { createSwaggerSchema } from '@/providers/swagger.js'
 import type { FastifyInstance } from 'fastify'
-import { ping } from './ping.js'
+import { ping } from '../controllers/ping/ping.js'
 
 export async function pingRoutes(app: FastifyInstance) {
   app.get(

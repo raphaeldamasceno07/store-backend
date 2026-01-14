@@ -1,7 +1,7 @@
-import { app } from './app.js'
-import { env } from './env/index.js'
+import { env } from '../env/index.js'
 
 import open from 'open'
+import { app } from './app.js'
 
 const DOC_LINK = `http://localhost:${env.PORT}/docs`
 
