@@ -12,6 +12,7 @@ export class GetAllBannersUseCase {
 
   async execute(): Promise<GetAllBannersUseCaseResponse> {
     const banners = await this.bannersRepository.findManyBanners()
+
     return { banners }
   }
 }

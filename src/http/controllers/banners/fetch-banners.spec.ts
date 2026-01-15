@@ -18,7 +18,7 @@ describe('Fetch Banners (e2e)', () => {
     expect(response.body.banners).toHaveLength(1)
     expect(response.body.banners).toEqual([
       expect.objectContaining({
-        image: 'fake_banner.svg',
+        image: 'http://localhost:3333/media/banners/fake_banner.svg',
         link: '/categories/test',
       }),
     ])
