@@ -1,8 +1,10 @@
-import type { BannersRepository } from '@/repositories/banners-repository.js'
-import type { Banner } from '@prisma/client'
+import type {
+  BannerResponse,
+  BannersRepository,
+} from '@/repositories/banners-repository.js'
 
 interface GetAllBannersUseCaseResponse {
-  banners: Pick<Banner, 'image' | 'link'>[]
+  banners: BannerResponse[]
 }
 
 export class GetAllBannersUseCase {
@@ -10,6 +12,7 @@ export class GetAllBannersUseCase {
 
   async execute(): Promise<GetAllBannersUseCaseResponse> {
     const banners = await this.bannersRepository.findManyBanners()
+
     return { banners }
   }
 }

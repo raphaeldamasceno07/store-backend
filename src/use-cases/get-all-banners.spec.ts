@@ -13,18 +13,15 @@ describe('Get All Banners Unit', () => {
   })
 
   it('should be able to get all banners', async () => {
-    bannersRepository.banners = bannersMocked.map((banner) => ({
-      image: banner.image,
-      link: banner.link,
-    }))
+    bannersRepository.banners = bannersMocked
 
-    const result = await sut.execute()
+    const { banners } = await sut.execute()
 
-    expect(result.banners).toHaveLength(5)
-    expect(result.banners[0]).toHaveProperty('image')
-    expect(result.banners[0]).toHaveProperty('link')
-    expect(result.banners[0]).not.toHaveProperty('id')
-    expect(result.banners[0]).not.toHaveProperty('created_at')
-    expect(result.banners[0]).not.toHaveProperty('updated_at')
+    expect(banners).toHaveLength(5)
+    expect(banners[0]).toHaveProperty('image')
+    expect(banners[0]).toHaveProperty('link')
+    expect(banners[0]).not.toHaveProperty('id')
+    expect(banners[0]).not.toHaveProperty('created_at')
+    expect(banners[0]).not.toHaveProperty('updated_at')
   })
 })

@@ -19,7 +19,7 @@ model User {
   password   String
   token      String
   create_at  DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @updatedAt
 
   adresses UserAdress[]
   orders   Order[]
@@ -38,7 +38,7 @@ model UserAdress {
   country    String
   complement String?
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @updatedAt
   user       User     @relation(fields: [user_id], references: [id])
 
   @@map("user_adress")
@@ -49,7 +49,7 @@ model Banner {
   image      String
   link       String
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @updatedAt
 
   @@map("banners")
 }
@@ -78,7 +78,7 @@ model ProductImage {
   product_id Int
   url        String
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @updatedAt
   product    Product  @relation(fields: [product_id], references: [id])
 
   @@map("product_images")
@@ -101,7 +101,7 @@ model Category {
   slug       String   @unique
   name       String
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @updatedAt
 
   products Product[]
   metadata CategoryMetadata[]
@@ -163,7 +163,7 @@ model OrderProduct {
   quantity   Int      @default(1)
   price      Float
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @updatedAt
 
   order   Order   @relation(fields: [order_id], references: [id])
   product Product @relation(fields: [product_id], references: [id])

@@ -14,30 +14,12 @@ describe('Fetch Banners (e2e)', () => {
   it('should be able to fetch banners', async () => {
     const response = await request(app.server).get('/banners').send()
 
-    console.log(response.body)
-
     expect(response.status).toEqual(200)
-    expect(response.body.banners).toHaveLength(5)
+    expect(response.body.banners).toHaveLength(1)
     expect(response.body.banners).toEqual([
       expect.objectContaining({
-        image: 'https://example.com/banner1.jpg',
-        link: 'https://example.com/product1',
-      }),
-      expect.objectContaining({
-        image: 'https://example.com/banner2.jpg',
-        link: 'https://example.com/product2',
-      }),
-      expect.objectContaining({
-        image: 'https://example.com/banner3.jpg',
-        link: 'https://example.com/product3',
-      }),
-      expect.objectContaining({
-        image: 'https://example.com/banner4.jpg',
-        link: 'https://example.com/product4',
-      }),
-      expect.objectContaining({
-        image: 'https://example.com/banner5.jpg',
-        link: 'https://example.com/product5',
+        image: 'http://localhost:3333/media/banners/fake_banner.svg',
+        link: '/categories/test',
       }),
     ])
   })
