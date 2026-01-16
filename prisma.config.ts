@@ -12,6 +12,6 @@ export default defineConfig({
   datasource: {
     url:
       env.DATABASE_URL ||
-      'postgresql://docker:docker@localhost:5432/mydb?schema=public',
+      'postgresql://docker:docker@localhost:5432/api-store?schema=public',
   },
 })
