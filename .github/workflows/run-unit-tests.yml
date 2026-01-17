@@ -1,37 +1,20 @@
-name: Run Unit Tests
-
+name: Unit Tests
 on:
-  # Roda quando houver novos commits na main ou develop
   push:
-    branches:
-      - main
-
-  # Roda sempre que um Pull Request for aberto ou atualizado
-  # tendo como destino as branches main ou develop
+    branches: [main, develop]
   pull_request:
-    branches:
-      - main
-      - develop
+    branches: [main, develop]
 
 jobs:
-  run-unit-tests:
-    name: Run Unit Tests
+  unit:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
+        with: version: 9
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run tests
-        run: pnpm test
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run test:unit
