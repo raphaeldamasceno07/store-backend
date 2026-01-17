@@ -14,6 +14,7 @@
     "test": "vitest run",
     "test:unit": "vitest run --project=unit",
     "test:e2e": "vitest run --project=e2e",
+    "test:watch": "vitest",
     "pretest:e2e": "pnpm run services:up && npx prisma migrate deploy",
     "posttest:e2e": "pnpm run services:stop",
     "lint:check": "prettier --check . && eslint .",
