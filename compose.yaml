@@ -9,5 +9,15 @@ services:
     volumes:
       - postgres_data:/bitnami/postgresql
 
+  store_test:
+    image: bitnami/postgresql:latest
+    container_name: store-pg-test
+    env_file:
+      - .env.test
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_test_data:/bitnami/postgresql
 volumes:
   postgres_data:
+  postgres_test_data:
