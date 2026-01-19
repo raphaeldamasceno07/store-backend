@@ -7,13 +7,13 @@ import type {
 } from '../products-repository.js'
 
 export class InMemoryProductsRepository implements ProductsRepository {
-  public items: Product[] = []
+  public products: Product[] = []
 
   async findManyProducts(filters: productFilter): Promise<ProductsResponse[]> {
-    let filteredItems = [...this.items]
+    let filteredproductsArray = [...this.products]
 
     if (filters.order) {
-      filteredItems.sort((a, b) => {
+      filteredproductsArray.sort((a, b) => {
         switch (filters.order) {
           case 'views':
             return (b.views_count ?? 0) - (a.views_count ?? 0)
@@ -29,11 +29,11 @@ export class InMemoryProductsRepository implements ProductsRepository {
 
     // 3. Simulação do Limite
     if (filters.limit) {
-      filteredItems = filteredItems.slice(0, filters.limit)
+      filteredproductsArray = filteredproductsArray.slice(0, filters.limit)
     }
 
     // 4. Mapeamento para o formato de Resposta (ProductsResponse)
-    const response: ProductsResponse[] = filteredItems.map((item) => {
+    const response: ProductsResponse[] = filteredproductsArray.map((item) => {
       // Define o caminho relativo primeiro
       const relativePath = item.image
         ? `media/products/${item.image}`
