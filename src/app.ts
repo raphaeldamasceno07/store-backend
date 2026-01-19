@@ -39,14 +39,13 @@ app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
 
+app.register(pingRoutes)
 app.register(bannersRoutes)
 
 app.register(fastifyStatic, {
   root: path.join(__dirname, 'public'),
   prefix: '/public/',
 })
-
-app.register(pingRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

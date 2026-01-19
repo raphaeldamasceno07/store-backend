@@ -9,10 +9,9 @@ export async function fetchBanners(
   const fetchBanners = makeGetAllBannersUseCase()
   const { banners } = await fetchBanners.execute()
 
-  // O Controller usa o utilitário para formatar o dado para o cliente
   const bannersWithAbsoluteUrl = banners.map((banner) => ({
     ...banner,
-    image: getAbsoluteImageUrl(banner.image),
+    image: getAbsoluteImageUrl(`media/banners/${banner.image}`),
   }))
 
   return reply.status(200).send({ banners: bannersWithAbsoluteUrl })
