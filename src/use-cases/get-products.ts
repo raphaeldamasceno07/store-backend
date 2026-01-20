@@ -3,6 +3,7 @@ import type {
   ProductsRepository,
   ProductsResponse,
 } from '@/repositories/products-repository.js'
+import { InvalidLimitError } from './errors/invalid-limit-error.js'
 
 interface GetProductsUseCaseParamsRequest {
   filter: productFilter
@@ -19,13 +20,11 @@ export class GetProductsUseCase {
   }: GetProductsUseCaseParamsRequest): Promise<GetProductsUseCaseResponse> {
     const { limit, metadata, order } = filter
 
-    const finalFilter: productFilter = {
-      ...(limit !== undefined && { limit }),
-      ...(order !== undefined && { order }),
-      ...(metadata !== undefined && { metadata }),
+    if (limit !== undefined && limit < 1) {
+      throw new InvalidLimitError()
     }
 
-    const products = await this.productRepository.findManyProducts(finalFilter)
+    const products = await this.productRepository.findManyProducts(filter)
 
     return { products }
   }
