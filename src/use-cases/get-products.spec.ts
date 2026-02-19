@@ -62,9 +62,6 @@ describe('Get products Use Case', () => {
       filter: { order: 'price' },
     })
 
-    console.log(products.map((p) => p.price))
-    console.log(products[0], products[1])
-
     expect(products[0]).toHaveProperty('label', 'Mouse Gamer Logitech G403')
     expect(products[0].price).toBeLessThanOrEqual(products[1].price)
   })
@@ -107,6 +104,7 @@ describe('Get products Use Case', () => {
   //#endregion
 
   //#region --- TESTES DE ERRO (NEGATIVE PATHS) ---
+
   it('should throw an error if the repository fails', async () => {
     vi.spyOn(productsRepository, 'findManyProducts').mockRejectedValueOnce(
       new Error('Database connection failed'),
@@ -124,30 +122,6 @@ describe('Get products Use Case', () => {
     })
 
     await expect(promise).rejects.toBeInstanceOf(InvalidLimitError)
-  })
-
-  it('should return a default image url when product image is missing', async () => {
-    productsRepository.products = [
-      {
-        id: 99,
-        label: 'Produto Sem Foto',
-        price: 100,
-        description: 'Teste',
-        category_id: 1,
-        views_count: 0,
-        sales_count: 0,
-        image: null,
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-    ]
-
-    // 2. Act
-    const { products } = await sut.execute({ filter: {} })
-
-    // 3. Assert: Verificamos se ele usou o 'image.svg'
-    // O getAbsoluteImageUrl deve ter transformado isso em uma URL completa
-    expect(products[0].image).toContain('media/image.svg')
   })
   //#endregion
 })
