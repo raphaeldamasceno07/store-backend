@@ -1,5 +1,5 @@
 import { app } from '@/app.js'
-import { prisma } from '@/libs/prisma.js'
+import { prisma } from '@/lib/prisma/prisma.js'
 import request from 'supertest'
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 

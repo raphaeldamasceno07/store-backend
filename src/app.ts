@@ -1,10 +1,15 @@
 import cors from '@fastify/cors'
 import fastifyStatic from '@fastify/static'
-import fastifySwagger from '@fastify/swagger'
-import fastifySwaggerUi from '@fastify/swagger-ui'
+import { fastifySwagger } from '@fastify/swagger'
+import scalarApiReference from '@scalar/fastify-api-reference'
 import fastify from 'fastify'
+import {
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+  type ZodTypeProvider,
+} from 'fastify-type-provider-zod'
 import path from 'node:path'
-
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { ZodError } from 'zod'
@@ -15,38 +20,37 @@ import { pingRoutes } from './http/controllers/ping/route.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-export const app = fastify()
+export const app = fastify().withTypeProvider<ZodTypeProvider>()
+
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
 
 app.register(cors, {
   origin: '*',
 })
 
 app.register(fastifySwagger, {
-  swagger: {
+  openapi: {
     info: {
-      title: 'Store API',
-      description: 'API Documentation for Store Backend',
+      title: 'e-commerce API',
+      description: 'API para um e-commerce',
       version: '1.0.0',
     },
-    host: 'localhost:3333',
-    schemes: ['http'],
-    consumes: ['application/json'],
-    produces: ['application/json'],
   },
+  transform: jsonSchemaTransform,
 })
 
-app.register(fastifySwaggerUi, {
+app.register(scalarApiReference, {
   routePrefix: '/docs',
 })
 
+app.register(pingRoutes)
 app.register(bannersRoutes)
 
 app.register(fastifyStatic, {
   root: path.join(__dirname, 'public'),
   prefix: '/public/',
 })
-
-app.register(pingRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
